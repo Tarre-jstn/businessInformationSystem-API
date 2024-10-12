@@ -209,20 +209,11 @@ button {
 tr{
 
 }
-tr:nth-child(even) {
-    background-color: #bebebe;
-}
-
-tr:nth-child(odd) {
-    background-color: #ffffff;
-}
 
 td, th {
     border-top: 1px solid #0F2C4A;
     border-bottom: 1px solid #0F2C4A;
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 td {
