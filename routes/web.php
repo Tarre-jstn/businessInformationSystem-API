@@ -10,16 +10,10 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\InvoiceController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BotmanController;
 use Inertia\Inertia;
-use BotMan\BotMan\BotMan;
-use BotMan\BotMan\Drivers\DriverManager;
-use BotMan\BotMan\Messages\Incoming\Answer;
-DriverManager::loadDriver(\BotMan\Drivers\Web\WebDriver::class);
 use Spatie\Analytics\Facades\Analytics;
 use Spatie\Analytics\Period;
 use App\Http\Controllers\AnalyticsController;
-
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -48,17 +42,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Customer/Homepage');
     })->name('homepage');
 
-    Route::get('/sale', function () {
-        return Inertia::render('Customer/SaleProducts');
-    })->name('sale');
-
     Route::get('/home', function () {
         return Inertia::render('Home');
     })->name('home');
-
-    Route::get('/account', function () {
-        return Inertia::render('Customer/Account');
-    })->name('account_settings');
 
     Route::get('/website', function () {
         return Inertia::render('Website');
@@ -88,14 +74,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Preview_Homepage');
     })->name('preview_homepage');
 
-    Route::get('/products_page', function () {
-        return Inertia::render('Customer/Products');
-    })->name('products_page');
-
-    Route::get('/aboutUs_page', function () {
-        return Inertia::render('Customer/AboutUs');
-    })->name('aboutUs_page');
-
     Route::get('/editWebsite1', function () {
         return Inertia::render('EditWebsite1');
     })->name('editWebsite1');
@@ -115,23 +93,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/user-id', [GetIdController::class, 'getUserId']);
     Route::get('/business-id', [GetIdController::class, 'getBusinessId']);
 
-    Route::get('/showUser', [ProfileController::class, 'show'])
-    ->name('showUser');
-
-    Route::put('/update_user/{id}', [ProfileController::class, 'update']);
-
-    
-    Route::get('/BusinessInfo', function () {
-        return Inertia::render('BusinessInfo');
-    })->name('BusinessInfo');
-
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
     
-
    
 });
 
