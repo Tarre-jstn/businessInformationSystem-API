@@ -1,6 +1,7 @@
 <script setup>
 import { Inertia } from '@inertiajs/inertia';
 import { onMounted, ref } from 'vue';
+import Chatbot from '@/Components/Chatbot.vue';
 
 const businessInfo = {
     businessImage: ref(''),
@@ -14,9 +15,13 @@ const businessInfo = {
     business_Tiktok: ref(''),
     businessDescription: ref(''),
     businessDetails: ref(''), 
-    homePageImage: ref('')
+    homePageImage: ref(''),
+    business_Province: ref(''),
+    business_City: ref(''),
+    business_Barangay: ref('')
 }
 
+let isLoading = ref(true);
 
 const textAreas = {
     about_us1: ref(''),
@@ -44,6 +49,10 @@ function logout(button){
     Inertia.post(route('logout'), {button});
 }
 
+function account(){
+    Inertia.visit(route('account_settings'));
+}
+
 onMounted(()=>{
     getWebsiteInfo();
 })
@@ -51,7 +60,7 @@ onMounted(()=>{
 async function getWebsiteInfo(){
     try{
 
-        const getBusinessInfo = await axios.get('/api/business_info', {
+        const getBusinessInfo = await axios.get('/api/Business', {
             params: {user_id: 1}
         });
         
@@ -62,12 +71,18 @@ async function getWebsiteInfo(){
         
         console.log('Website data: ',getWebsiteInfo1.data);
 
-        const imgBusinessUrl = `/storage/${getBusinessInfo.data.business_image}`;
-        businessInfo.businessImage.value = imgBusinessUrl;
+        businessInfo.businessImage.value = `/storage/business_logos/${getBusinessInfo.data.business_image}`;
+       
+
         businessInfo.businessName.value = getBusinessInfo.data.business_Name;
         businessInfo.business_Email.value = getBusinessInfo.data.business_Email;
         businessInfo.business_Contact_Number.value = getBusinessInfo.data.business_Contact_Number;
         businessInfo.business_Address.value = getBusinessInfo.data.business_Address;
+
+        businessInfo.business_Province.value = getBusinessInfo.data.business_Province;
+        businessInfo.business_City.value = getBusinessInfo.data.business_City;
+        businessInfo.business_Barangay.value = getBusinessInfo.data.business_Barangay;
+
 
         businessInfo.business_Facebook.value = getBusinessInfo.data.business_Facebook;
         businessInfo.business_X.value = getBusinessInfo.data.business_X;
@@ -141,8 +156,16 @@ function goTochatPage(){
                     <a class="text-white text-[18px]">Products & Services</a>
                     <a class="text-white text-[18px]">About Us</a>
                     <p>|</p>
-                    <button @click="logout('register')" class="text-white">Register</button>
-                    <button @click="logout('logout')" class=" cursor-pointer bg-white border border-white rounded-sm py-1 px-3">Log Out</button>
+                    <div class="flex flex-col">
+                        <a @click="links('logout')" class=" cursor-pointer text-white text-[14px] underline">Log Out</a>
+                        <a @click="account" class=" cursor-pointer text-white text-[14px] underline">Account</a>
+                    </div> 
+                    <div class="w-[50px] h-[50px]">
+                        <img v-if="isLoading" src='/storage/business_logos/default-profile.png'/>
+                        <img v-else-if="businessInfo.businessImage.value" :src='businessInfo.businessImage.value' alt="Logo" />
+                        <img v-else src='/storage/business_logos/default-profile.png'/>
+                    </div>
+                    
                 </div>
         </div>
 
@@ -287,6 +310,8 @@ function goTochatPage(){
 
     <!-- section 4/Chat Section -->
 <section>
+
+    <div class="bg-website-main h-[10px] w-full"></div>
     <div class="bg-website-main h-[2px] w-full"></div>
         <div class="bg-website-main1 flex flex-col min-h-screen">
 
@@ -345,6 +370,8 @@ function goTochatPage(){
         <p class="text-white mt-[10px]">Email: {{ businessInfo.business_Email }} </p>
         <p class="text-white">Contact No.: {{ businessInfo.business_Contact_Number }} </p>
         <p class="text-white">Address: {{ businessInfo.business_Address }} </p>
+        <p class="text-white">{{ businessInfo.business_Province }}, 
+            {{ businessInfo.business_City }}, {{ businessInfo.business_Barangay }}  </p>
     </div>
 </div>
 </div>
@@ -357,7 +384,10 @@ function goTochatPage(){
     <p class="text-[17px] text-white mt-2"><i class="fa fa-copyright"></i> {{ textAreas.businessName }} All rights reserved</p>
 </div>
 </div>
-    </section>
+
+<Chatbot />
+
+</section>
 </template>
 <style>
 .icon-color {

@@ -18,7 +18,6 @@ const textAreas = {
     card5_img: ref(''),
     card6: ref(''),
     card6_img: ref('')
-    
 }
 
 const feature_toggle=ref('true');

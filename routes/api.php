@@ -8,16 +8,18 @@ use App\Http\Controllers\InvoiceItemController;
 use App\Http\Controllers\InvoiceAdditionalController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Log;
-
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Models\User;
 use App\Models\Business;
 use App\Models\Product;
 use App\Models\Invoice;
 use App\Http\Controllers\business_info_controller;
 use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatbotController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -30,8 +32,6 @@ Route::get('/all-users', function(){
 Route::get('/all-business', function(){
     return Business::all();
 });
-
-Route::get('/business_info', [BusinessController::class, 'showBusiness']);
 
 Route::post('/website', [WebsiteController::class, 'store']);
 Route::get('/website', [WebsiteController::class, 'info']);
@@ -48,6 +48,21 @@ Route::put('/products/{id}', [ProductController::class, 'update']);
 Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 
 Route::get('/featured-products', [ProductController::class, 'featured_products'])->name('featured_products');
+Route::get('/listed-products', [ProductController::class, 'listed_products'])->name('listed_products');
+Route::get('/sale-products', [ProductController::class, 'sale_products'])->name('sale_products');
+
+
+Route::get('/Business', [BusinessController::class, 'show']);
+Route::post('/Business', [BusinessController::class, 'store']);
+Route::put('/Business/{id}', [BusinessController::class, 'update']);
+Route::delete('/Business/{id}', [BusinessController::class, 'destroy']);
+
+Route::get('/chatbot-response', [ChatbotController::class, 'index']);
+Route::post('/chatbot-response', [ChatbotController::class, 'store']);
+Route::put('/chatbot-response/{id}', [ChatbotController::class, 'update']);
+Route::delete('/chatbot-response/{id}', [ChatbotController::class, 'destroy']);
+
+
 
 //Dedicated for seniorPWD_discountable
 Route::put('/products/{id}/discountable', [ProductController::class, 'updateDiscountable']);
@@ -55,6 +70,7 @@ Route::put('/products/{id}/discountable', [ProductController::class, 'updateDisc
 Route::post('/business_info', [BusinessController::class, 'store']);
 Route::put('/business_info/{id}', [BusinessController::class, 'update']);
 Route::delete('/business_info/{id}', [BusinessController::class, 'destroy']);
+
 
 Route::get('/invoice', [InvoiceController::class, 'index']);
 Route::post('/invoice', [InvoiceController::class, 'store']);

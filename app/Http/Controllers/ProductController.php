@@ -136,4 +136,45 @@ class ProductController extends Controller
         }
         return response()->json($productsArray);
     }
+
+    public function listed_products(Request $request){
+       
+        $listedProducts = Product::where('business_id', $request->business_id)
+                            ->where('status', 'Listed')->get();
+
+        if ($listedProducts->isEmpty()) {
+            return response()->json(['error' => 'No on sale products found'], 404);
+        }
+        $productsArray=[];
+
+        foreach($listedProducts as $product){
+            $productsArray[]=[
+                'product_name' => $product->name,
+                'product_img' => $product->image,
+                'product_desc' => $product->description
+            ];
+        }
+        return response()->json($productsArray);
+    }
+
+    public function sale_products(Request $request){
+       
+        $saleProducts = Product::where('business_id', $request->business_id)
+                            ->where('on_sale', 'yes')->get();
+
+        if ($saleProducts->isEmpty()) {
+            return response()->json(['error' => 'No on sale products found'], 404);
+        }
+        $productsArray=[];
+
+        foreach($saleProducts as $product){
+            $productsArray[]=[
+                'product_name' => $product->name,
+                'product_img' => $product->image,
+                'product_price' => $product->on_sale_price
+            ];
+        }
+        return response()->json($productsArray);
+    }
+
 }
