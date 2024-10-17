@@ -21,6 +21,7 @@ class Business extends Model
 
     // Allow mass assignment for these fields
     protected $fillable = [
+        'business_id',
         'business_image',
         'user_id',
         'business_Name',

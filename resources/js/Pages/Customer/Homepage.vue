@@ -310,7 +310,9 @@ function goTochatPage(){
 
     <!-- section 4/Chat Section -->
 <section>
+
     <div class="bg-website-main h-[10px] w-full"></div>
+    <div class="bg-website-main h-[2px] w-full"></div>
         <div class="bg-website-main1 flex flex-col min-h-screen">
 
         

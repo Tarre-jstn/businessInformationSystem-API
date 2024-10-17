@@ -7,6 +7,7 @@ use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\GetIdController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\InvoiceController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BotmanController;
@@ -14,9 +15,11 @@ use Inertia\Inertia;
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\Drivers\DriverManager;
 use BotMan\BotMan\Messages\Incoming\Answer;
-
-
 DriverManager::loadDriver(\BotMan\Drivers\Web\WebDriver::class);
+use Spatie\Analytics\Facades\Analytics;
+use Spatie\Analytics\Period;
+use App\Http\Controllers\AnalyticsController;
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -26,6 +29,15 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+// //Pwede idelete
+// Route::get('data', function(){
+//     $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
+//     dd($analyticsData);
+// });
+
+Route::get('/analytics', [AnalyticsController::class, 'index']);
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
@@ -60,9 +72,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Inventory');
     })->name('inventory');
 
-    Route::get('/receipt', function () {
-        return Inertia::render('Receipt');
-    })->name('receipt');
+    Route::get('/invoice', function () {
+        return Inertia::render('Invoice');
+    })->name('invoice');
 
     Route::get('/finance', function () {
         return Inertia::render('Finance');

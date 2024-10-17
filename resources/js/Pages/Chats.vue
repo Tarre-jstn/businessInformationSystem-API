@@ -1,3 +1,4 @@
+
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
@@ -260,10 +261,5 @@ const updateChatbotData = async () => {
                         </div>
                     </div>
                 </div>
-         
-            
-        </div>
-    </AuthenticatedLayout>
 </template>
-
 

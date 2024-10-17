@@ -46,6 +46,13 @@ class BusinessController extends Controller
             'business_Tiktok' => 'nullable|string|max:255'
         ]);
 
+    $business_image=null;
+    if ($request->hasFile('business_image')) {
+        $image = $request->file('business_image');
+        $path = $image->store('public/business_logos');
+        $business_image = basename($path);
+    }
+
         $business_image = null; // Initialize the variable
 
         if ($request->hasFile('business_image')) {

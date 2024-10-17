@@ -41,6 +41,8 @@ const addCategory = async (type) => {
         } else {
             unlistedCategories.value.push(savedCategory);
         }
+
+        emit('category-added');
     } catch (error) {
         console.error("Error adding category:", error);
     }

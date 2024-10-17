@@ -19,12 +19,14 @@ const textAreas = {
     card6: ref(''),
     card6_img: ref('')
 }
+
+const feature_toggle=ref('true');
+const onSale_toggle=ref('true');
 onMounted(()=>{
 
     getWebsiteInfo();
 });
 
-// //store default / to be changed data:
 
 async function getWebsiteInfo(){
     try{
@@ -77,37 +79,39 @@ async function getWebsiteInfo(){
         console.error('There was an error fetching the data:', error);
     }
 }
+async function save(){
 
-// const editButton=ref(null);
-// function edit(area){
-//     editButton.value = area;
-// }
 
-// async function save(){
-//     editButton.value = false;
+    const response_userId = await axios.get('/user-id');
+        const userId = response_userId.data.user_id;
+    const getBusinessInfo = await axios.get('/api/business_info', {
+            params: {user_id: userId}
+        });
+        const businessId = getBusinessInfo.data.business_id;
 
-//     const response_userId = await axios.get('/user-id');
-//         const userId = response_userId.data.user_id;
-//         console.log("Save function called");
-//     const getBusinessInfo = await axios.get('/api/business_info', {
-//             params: {user_id: userId}
-//         });
-//         const businessId = getBusinessInfo.data.business_id;
+        const formData = new FormData();
+        formData.append('business_id', businessId);
+        formData.append('featured_section', feature_toggle.value);
+        formData.append('onSale_section', onSale_toggle.value);
 
-//         const formData = new FormData();
-//         formData.append('business_id', businessId);
-//         formData.append('about_us1', textAreas.about_us1.value);
-//         formData.append('about_us2', textAreas.about_us2.value);
-//         formData.append('about_us3', textAreas.about_us3.value);
+        console.log("Form Data being sent:");
+    for (let pair of formData.entries()) {
+        console.log(`${pair[0]}: ${pair[1]}`);
+    }
 
-//     const saveBusinessDesc = await axios.post('/api/website-update', formData, {
-//         headers:{
-//             'Content-Type': 'multipart/form-data'
-//         }
-//     });
-//     console.log('Save response:', saveBusinessDesc.data);
+    const saveBusinessDesc = await axios.post('/api/website-update', formData, {
+        headers:{
+            'Content-Type': 'multipart/form-data'
+        }
+    });
+
+    const getWebsiteInfo = await axios.get('/api/website', {
+            params: {business_id: businessId}
+        });
+        console.log('Website Info: ',getWebsiteInfo.data);
+        alert("Changes Saved Successfully.");
     
-// }
+}
 
 function goToEditWebsite4(){
     Inertia.visit(route('editWebsite4'));
@@ -118,16 +122,37 @@ function goToEditWebsite4(){
     <Head title="Website" />
 
     <AuthenticatedLayout>
-     
-        <!-- <div class="bg-gray-300 flex items-center p-2">
-            <p class="flex-grow text-center mr-3">You are currently using the edit mode.</p>
-                <button @click="save()" class="px-6 py-1 bg-gray-600 ml-auto">Save</button>
-        </div> -->
-
         
-        <div class="ml-1 bg-website-main flex min-h-screen relative">
+        <div class="ml-1 bg-website-main flex flex-col min-h-screen relative">
 
-            <div class="flex flex-col items-center p-3 absolute top-[10px] left-0 right-0 bottom-[500px] m-auto">
+        <div class="ml-auto mt-6 mr-5 p-2 flex flex-col items-center w-[450px] h-1/2 bg-white border-white rounded-lg">
+            <div class="flex items-center justify-center space-x-2 w-full">
+            <p class=" text-lg text-black">Display Feature Section on Website</p>
+            <label class="switch">
+                <input type="checkbox" v-model="feature_toggle" true-value="true" false-value="false" />
+                <span class="slider round"></span>
+            </label>
+            <span class="text-base text-black">
+                {{ feature_toggle === 'true' ? 'Show' : 'Don\'t Show' }}
+            </span>
+            </div>
+
+            <div class="flex items-center justify-center space-x-2 w-full">
+            <p class=" text-lg text-black">Display On Sale Section on Website</p>
+            <label class="switch">
+                <input type="checkbox" v-model="onSale_toggle" true-value="true" false-value="false" />
+                <span class="slider round"></span>
+            </label>
+            <span class="text-base text-black">
+                {{ onSale_toggle === 'true' ? 'Show' : 'Don\'t Show' }}
+            </span>
+            </div>
+                
+                <button @click="save" class="mt-6 text-white px-6 py-1 bg-gray-600 ml-auto">Save</button>
+                
+            </div>
+
+            <div class="flex flex-col items-center p-3 relative top-[10px] left-0 right-0 bottom-[300px] m-auto">
                 <p class="mt-[10px] text-[40px]  text-white font-bold  text-center">Featured Products</p>
                 <p class="mt-[10px] text-[20px]  text-white  text-center">
                     A list of the most popular products loved by customers. 
@@ -135,8 +160,8 @@ function goToEditWebsite4(){
                 </p>
             </div>
 
-            <!-- edit business info wag to iedit kasi business name ito-->
-            <div class=" mt-8 mx-auto my-auto flex flex-wrap justify-center gap-4 w-full max-w-screen-lg mt-[10px] px-4 pt-[200px]">
+            
+            <div class="mx-auto my-auto flex flex-wrap justify-center gap-4 w-full max-w-screen-lg px-4 pt-[70px]">
                 
                 <div class="block flex flex-row gap-5">
                 <!-- card 1 -->
@@ -191,4 +216,53 @@ function goToEditWebsite4(){
     </AuthenticatedLayout>
 
 </template>
+
+<style scoped>
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+</style>
 

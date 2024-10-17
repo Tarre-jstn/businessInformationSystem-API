@@ -11,6 +11,7 @@ import { ArchiveBoxIcon, BuildingLibraryIcon, ChatBubbleLeftRightIcon, GlobeAltI
         </div>
         <nav>
             <ul>
+
                 <li class="flex items-center mb-4"><Link :href="route('home')" :class="{ active: route().current('home') }">
                     <HomeIcon class="size-6"/>
                     <span class="ml-3">Home</span>
@@ -47,7 +48,14 @@ import { ArchiveBoxIcon, BuildingLibraryIcon, ChatBubbleLeftRightIcon, GlobeAltI
                 </Link></li>
                 <li class="flex items-center mb-4"><Link :href="route('BusinessInfo')" :class="{ active: route().current('BusinessInfo') }">
                     <span class="ml-3">BusinessInfo</span>
-                </Link></li>
+
+                <li><Link :href="route('home')"><i class="icon-home"></i> Home</Link></li>
+                <li><Link :href="route('website')"><i class="icon-globe"></i> Website</Link></li>
+                <li><Link :href="route('chats')"><i class="icon-chat"></i> Chats</Link></li>
+                <li><Link :href="route('inventory')"><i class="icon-inventory"></i> Inventory</Link></li>
+                <li><Link :href="route('invoice')"><i class="icon-receipt"></i> Receipt</Link></li>
+                <li><Link :href="route('finance')"><i class="icon-finance"></i> Finance</Link></li>
+                <li><Link :href="route('settings')"><i class="icon-settings"></i> Additional Settings</Link></li>
             </ul>
         </nav>
     </div>
