@@ -12,17 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('businesses', function (Blueprint $table) {
-            $table->bigIncrements('business_id')->primary();  
+            $table->bigIncrements('business_id')->primary();  // Add primary key
+            //$table->unsignedInteger('user_id');
             $table->string('business_image')->nullable();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('business_Name');
-            $table->string('business_Email');
-            $table->string('business_Province');
-            $table->string('business_City');
-            $table->string('business_Barangay');
             $table->string('business_Address');
-            $table->string('business_Phone_Number');
-            $table->string('business_Telephone_Number');
+            $table->string('business_Contact_Number');
+            $table->string('business_Email');
+            $table->unsignedBigInteger('business_TIN');
             $table->string('business_Facebook')->nullable();
             $table->string('business_X')->nullable();
             $table->string('business_Instagram')->nullable();

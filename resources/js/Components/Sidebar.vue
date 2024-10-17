@@ -34,6 +34,7 @@ onMounted(async () => {
         console.error("Error fetching business data:", error);
     }
 });
+
 </script>
 
 <template>
@@ -79,9 +80,6 @@ onMounted(async () => {
                     <BuildingStorefrontIcon class="size-6"/>
                     <span class="ml-3">BusinessInfo</span>
                 </Link></li>
-
-
-
             </ul>
         </nav>
     </div>
@@ -89,12 +87,11 @@ onMounted(async () => {
 
 <style scoped>
 .sidebar {
+    background-color: #1a202c;
+    color: #fff;
     width: 250px;
-    background-color: #202c34;
-    transition: all 0.3s ease;
-    z-index: 100;
     height: 100vh;
-    box-shadow: 2px 0px 12px rgba(0, 0, 0, 0.1);
+    z-index: 50; /* Adjust z-index to ensure the sidebar overlays other content */
 }
 
 
@@ -162,7 +159,7 @@ nav ul li a:hover {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center; /* Aligns items horizontally center */
 }
 
 .logo-image {
@@ -174,13 +171,23 @@ nav ul li a:hover {
 
 .logo h1 {
     font-size: 1.5em;
-    margin: 0; 
+    margin: 0; /* Reset margin for h1 */
 }
-.active {
-    background-color: #ddd;
-    color: #202c34;
+nav ul {
+    list-style-type: none;
+    padding: 0;
 }
-
-
-
+nav ul li {
+    margin: 10px 0;
+}
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+nav ul li a i {
+    margin-right: 10px;
+}
 </style>
