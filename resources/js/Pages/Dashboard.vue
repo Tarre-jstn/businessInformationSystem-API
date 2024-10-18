@@ -17,7 +17,7 @@
                 <!-- Inventory Table -->
                 <div class="flex flex-row justify-center">
                     <div class="inventory_table m-4 table_container">
-                        <div class="flex flex-row justify-between px-8 py-2">
+                        <div class="flex flex-row justify-between px-8 py-2text-neutral-950">
                             <div style="font-size: 23px;"><b>Inventory</b></div>
                                 <button>
                                     <ResponsiveNavLink :href="route('inventory')" :active="route().current('inventory')" style="color: white; font-size: 12px;">View all products</ResponsiveNavLink>
@@ -338,10 +338,11 @@ const fetchFinancesByDate = async () => {
         console.error("Error fetching finances by date:", error);
     }
 };
-        const business_Facebook = ref('');
-        const business_X = ref('');
-        const business_Instagram = ref('');
-        const business_Tiktok = ref('');
+
+const business_Facebook = ref('');
+const business_X = ref('');
+const business_Instagram = ref('');
+const business_Tiktok = ref('');
 
 const fetchsocialmediaLinks = async() =>{
     try {const response_userId = await axios.get('/user-id');

@@ -37,7 +37,7 @@ const submit = () => {
             {{ status }}
         </div>
 
-        <form @submit.prevent="submit">
+        <form @submit.prevent="submit" class="px-5">
             <div>
                 <InputLabel for="email" value="Email" />
 
@@ -69,26 +69,30 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            <div class="block mt-4">
+            <div class="flex flex-row justify-between items-center mt-4">
                 <label class="flex items-center">
                     <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
+                    <span class="ms-2 text-sm text-gray-600 dark:text-gray-400"><div>Remember me</div></span>
                 </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
                     class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                 >
-                    Forgot your password?
+                    <div>Forgot your password?</div>
                 </Link>
+            </div>
 
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <div class="flex items-center justify-center mt-6" style="font-size: 1rem; line-height: 1.5rem;">
+                <PrimaryButton :class="{ 'opacity-25': form.processing } " :disabled="form.processing">
                     Log in
                 </PrimaryButton>
             </div>
         </form>
     </GuestLayout>
 </template>
+
+<style>
+*{
+    color: white;
+}</style>

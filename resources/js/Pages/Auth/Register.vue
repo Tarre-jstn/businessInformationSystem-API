@@ -27,7 +27,7 @@ const submit = () => {
     <GuestLayout>
         <Head title="Register" />
 
-        <form @submit.prevent="submit">
+        <form @submit.prevent="submit" class="px-5">
            
             <div>
                 <InputLabel for="name" value="Name" />
@@ -143,7 +143,7 @@ const submit = () => {
                     :href="route('login')"
                     class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                    Already registered? Edi wag!
+                    <div>Already registered?</div>
                 </Link>
 
                 <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
@@ -153,4 +153,7 @@ const submit = () => {
         </form>
     </GuestLayout>
 </template>
-    
+<style>
+*{
+    color: white;
+}</style>

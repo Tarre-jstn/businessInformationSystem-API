@@ -18,7 +18,7 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <GuestLayout class="px-5">
         <Head title="Confirm Password" />
 
         <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
@@ -48,3 +48,7 @@ const submit = () => {
         </form>
     </GuestLayout>
 </template>
+<style>
+*{
+    color: white;
+}</style>
