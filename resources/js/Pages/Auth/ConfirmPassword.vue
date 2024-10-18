@@ -21,6 +21,7 @@ const submit = () => {
     <GuestLayout class="px-5">
         <Head title="Confirm Password" />
 
+        <div class="text-7xl flex flex-col justify-center items-center mb-14"><b>Confirm Password</b></div>
         <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
             This is a secure area of the application. Please confirm your password before continuing.
         </div>
@@ -50,5 +51,5 @@ const submit = () => {
 </template>
 <style>
 *{
-    color: white;
+    color: #0F2C4A;
 }</style>

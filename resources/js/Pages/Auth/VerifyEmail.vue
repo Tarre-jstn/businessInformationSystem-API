@@ -22,6 +22,7 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
 <template>
     <GuestLayout class="px-5">
         <Head title="Email Verification" />
+        <div class="text-7xl flex flex-col justify-center items-center mb-14"><b>Email Verification</b></div>
 
         <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
             Thanks for signing up! Before getting started, could you verify your email address by clicking on the link
@@ -51,5 +52,5 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
 </template>
 <style>
 *{
-    color: white;
+    color: #0F2C4A;
 }</style>

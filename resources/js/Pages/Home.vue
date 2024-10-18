@@ -16,7 +16,7 @@
 
                 <!-- Inventory Table -->
                 <div class="flex flex-row justify-center">
-                    <div class="inventory_table m-4 table_container">
+                    <div class="inventory_table m-4 table_container text-black">
                         <div class="flex flex-row justify-between px-8 py-2">
                             <div style="font-size: 23px;"><b>Inventory</b></div>
                                 <button>

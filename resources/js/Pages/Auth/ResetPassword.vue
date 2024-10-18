@@ -37,6 +37,7 @@ const submit = () => {
 
         <form @submit.prevent="submit" class="px-5">
             <div>
+                <div class="text-7xl flex flex-col justify-center items-center mb-14"><b>Reset Password</b></div>
                 <InputLabel for="email" value="Email" />
 
                 <TextInput
@@ -92,5 +93,5 @@ const submit = () => {
 </template>
 <style>
 *{
-    color: white;
+    color: #0F2C4A;
 }</style>

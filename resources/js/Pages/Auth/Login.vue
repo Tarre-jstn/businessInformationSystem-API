@@ -39,6 +39,7 @@ const submit = () => {
 
         <form @submit.prevent="submit" class="px-5">
             <div>
+                <div class="text-7xl flex flex-col justify-center items-center mb-14"><b>Login</b></div>
                 <InputLabel for="email" value="Email" />
 
                 <TextInput
@@ -72,14 +73,14 @@ const submit = () => {
             <div class="flex flex-row justify-between items-center mt-4">
                 <label class="flex items-center">
                     <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600 dark:text-gray-400"><div>Remember me</div></span>
+                    <span class="ms-2 text-sm text-gray-600 dark:text-gray-400"><div><b>Remember me</b></div></span>
                 </label>
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
                     class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                 >
-                    <div>Forgot your password?</div>
+                    <div><b>Forgot your password?</b></div>
                 </Link>
             </div>
 
@@ -94,5 +95,5 @@ const submit = () => {
 
 <style>
 *{
-    color: white;
+    color: #0F2C4A;
 }</style>
