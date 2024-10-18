@@ -45,7 +45,7 @@ fetchsocialmediaLinks();
             <img :src="business_image" class="hidden md:block rounded-full shadow-2xl shadow-slate-950" alt="Logo" style="border-color: #081626; border-width: 10px; background-color: #FFFFFF;" />
         </div>
         <div
-            class="w-full sm:max-w-md mt-6 px-6 py-20 max-w-xl shadow-2xl shadow-slate-950 overflow-hidden sm:rounded-3xl" style="background-color: #FFFFFF; max-width: 40rem; color: #0F2C4A; border-width: 10px; border-color: #081626">
+            class="w-full sm:max-w-md mt-6 px-6 py-20 max-w-xl shadow-2xl shadow-slate-950 overflow-hidden sm:rounded-3xl" style="background-color: #FFFFFF; max-width: 40rem; color: #0F2C4A; border-width: 5px; border-color: #081626">
             <slot />
         </div>
     </div>
