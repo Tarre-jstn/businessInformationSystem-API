@@ -111,8 +111,6 @@ Route::get('print/summary/invoice_by_date/xlsx', [InvoiceController::class, 'pri
 Route::get('print/summary/finance_by_date_category/pdf', [FinanceController::class, 'printFinanceByDatePdf']);
 Route::get('print/summary/finance_by_date_category/xlsx', [FinanceController::class, 'exportFinanceByDateExcel']);
 
-Route::get('products/print/pdf', [FinanceController::class, 'printProductsPdf']);
-
+Route::get('products/print/pdf', [ProductController::class, 'exportProductsXslx']);
 Route::post('products/import/xlsx', [ProductController::class, 'importProductsXlsx']);
-
 Route::get('products/print/export/xlsx', [ProductController::class, 'exportProductsXslx']);

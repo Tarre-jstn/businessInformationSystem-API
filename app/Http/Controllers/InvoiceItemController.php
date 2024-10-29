@@ -121,6 +121,7 @@ class InvoiceItemController extends Controller
                 'amount' => $request->amount,
 
             ]);
+            
         }catch(Exception $e){
             return response()->json(data:['error in generating invoice items' => $e->getMessage()], status: 500);
         }
